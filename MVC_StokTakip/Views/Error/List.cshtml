@@ -1,0 +1,33 @@
+﻿@model List<MVC_StokTakip.Models.Entity.ELMAH_Error>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Hatalar</h2>
+
+<table class="table">
+    <thead style="background-color:aliceblue">
+        <tr>
+            <th>Hata ID</th>
+            <th>Host</th>
+            <th>Hata Tipi</th>
+            <th>Mesaj</th>
+            <th>Kullanıcı</th>
+            <th>Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => item.ErrorId)</td>
+                <td>@Html.DisplayFor(x => item.Host)</td>
+                <td>@Html.DisplayFor(x => item.Type)</td>
+                <td>@Html.DisplayFor(x => item.Message)</td>
+                <td>@Html.DisplayFor(x => item.User)</td>
+                <td>@Html.DisplayFor(x => item.TimeUtc)</td>
+            </tr>
+        }
+    </tbody>
+</table>

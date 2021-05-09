@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StokDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Depo1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepoAdi" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Application" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+          <Property Name="TimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="Sequence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllXml" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GirisCikis1">
+          <Key>
+            <PropertyRef Name="FisNo" />
+          </Key>
+          <Property Name="FisNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepoID" Type="int" Nullable="false" />
+          <Property Name="StokID" Type="int" Nullable="false" />
+          <Property Name="Miktar" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Birim" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="İslem" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Tarih" Type="datetime" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanici1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="İsim" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Soyisim" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stok1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StokAdi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StokMiktar" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="StokBirim" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="KDV" Type="int" Nullable="false" />
+          <Property Name="Fiyat" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="250" />
+          <Property Name="Resim" Type="varchar" MaxLength="50" />
+          <Property Name="DepoID" Type="int" />
+          <Property Name="KayitTarih" Type="datetime" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StokLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StokAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StokMiktar" Type="int" />
+          <Property Name="KullaniciID" Type="int" />
+          <Property Name="IslemSaati" Type="date" />
+          <Property Name="IslemTuru" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_GirisCikis1_Depo11">
+          <End Role="Depo1" Type="Self.Depo1" Multiplicity="1" />
+          <End Role="GirisCikis1" Type="Self.GirisCikis1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depo1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GirisCikis1">
+              <PropertyRef Name="DepoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GirisCikis1_Kullanici11">
+          <End Role="Kullanici1" Type="Self.Kullanici1" Multiplicity="1" />
+          <End Role="GirisCikis1" Type="Self.GirisCikis1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GirisCikis1">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GirisCikis1_Stok11">
+          <End Role="Stok1" Type="Self.Stok1" Multiplicity="1" />
+          <End Role="GirisCikis1" Type="Self.GirisCikis1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GirisCikis1">
+              <PropertyRef Name="StokID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok1_Depo1">
+          <End Role="Depo1" Type="Self.Depo1" Multiplicity="0..1" />
+          <End Role="Stok1" Type="Self.Stok1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depo1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok1">
+              <PropertyRef Name="DepoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok1_Kullanici1">
+          <End Role="Kullanici1" Type="Self.Kullanici1" Multiplicity="1" />
+          <End Role="Stok1" Type="Self.Stok1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok1">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StokDbModelStoreContainer">
+          <EntitySet Name="Depo1" EntityType="Self.Depo1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GirisCikis1" EntityType="Self.GirisCikis1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici1" EntityType="Self.Kullanici1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stok1" EntityType="Self.Stok1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StokLog" EntityType="Self.StokLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GirisCikis1_Depo11" Association="Self.FK_GirisCikis1_Depo11">
+            <End Role="Depo1" EntitySet="Depo1" />
+            <End Role="GirisCikis1" EntitySet="GirisCikis1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GirisCikis1_Kullanici11" Association="Self.FK_GirisCikis1_Kullanici11">
+            <End Role="Kullanici1" EntitySet="Kullanici1" />
+            <End Role="GirisCikis1" EntitySet="GirisCikis1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GirisCikis1_Stok11" Association="Self.FK_GirisCikis1_Stok11">
+            <End Role="Stok1" EntitySet="Stok1" />
+            <End Role="GirisCikis1" EntitySet="GirisCikis1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok1_Depo1" Association="Self.FK_Stok1_Depo1">
+            <End Role="Depo1" EntitySet="Depo1" />
+            <End Role="Stok1" EntitySet="Stok1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok1_Kullanici1" Association="Self.FK_Stok1_Kullanici1">
+            <End Role="Kullanici1" EntitySet="Kullanici1" />
+            <End Role="Stok1" EntitySet="Stok1" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StokDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="StokDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Depo1" EntityType="StokDbModel.Depo1" />
+          <EntitySet Name="GirisCikis1" EntityType="StokDbModel.GirisCikis1" />
+          <EntitySet Name="Kullanici1" EntityType="StokDbModel.Kullanici1" />
+          <EntitySet Name="Stok1" EntityType="StokDbModel.Stok1" />
+          <AssociationSet Name="FK_GirisCikis1_Depo11" Association="StokDbModel.FK_GirisCikis1_Depo11">
+            <End Role="Depo1" EntitySet="Depo1" />
+            <End Role="GirisCikis1" EntitySet="GirisCikis1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok1_Depo1" Association="StokDbModel.FK_Stok1_Depo1">
+            <End Role="Depo1" EntitySet="Depo1" />
+            <End Role="Stok1" EntitySet="Stok1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GirisCikis1_Kullanici11" Association="StokDbModel.FK_GirisCikis1_Kullanici11">
+            <End Role="Kullanici1" EntitySet="Kullanici1" />
+            <End Role="GirisCikis1" EntitySet="GirisCikis1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GirisCikis1_Stok11" Association="StokDbModel.FK_GirisCikis1_Stok11">
+            <End Role="Stok1" EntitySet="Stok1" />
+            <End Role="GirisCikis1" EntitySet="GirisCikis1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stok1_Kullanici1" Association="StokDbModel.FK_Stok1_Kullanici1">
+            <End Role="Kullanici1" EntitySet="Kullanici1" />
+            <End Role="Stok1" EntitySet="Stok1" />
+          </AssociationSet>
+          <EntitySet Name="StokLogs" EntityType="StokDbModel.StokLog" />
+          <EntitySet Name="ELMAH_Error" EntityType="StokDbModel.ELMAH_Error" />
+        </EntityContainer>
+        <EntityType Name="Depo1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepoAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GirisCikis1" Relationship="StokDbModel.FK_GirisCikis1_Depo11" FromRole="Depo1" ToRole="GirisCikis1" />
+          <NavigationProperty Name="Stok1" Relationship="StokDbModel.FK_Stok1_Depo1" FromRole="Depo1" ToRole="Stok1" />
+        </EntityType>
+        <EntityType Name="GirisCikis1">
+          <Key>
+            <PropertyRef Name="FisNo" />
+          </Key>
+          <Property Name="FisNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepoID" Type="Int32" Nullable="false" />
+          <Property Name="StokID" Type="Int32" Nullable="false" />
+          <Property Name="Miktar" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Birim" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="İslem" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depo1" Relationship="StokDbModel.FK_GirisCikis1_Depo11" FromRole="GirisCikis1" ToRole="Depo1" />
+          <NavigationProperty Name="Kullanici1" Relationship="StokDbModel.FK_GirisCikis1_Kullanici11" FromRole="GirisCikis1" ToRole="Kullanici1" />
+          <NavigationProperty Name="Stok1" Relationship="StokDbModel.FK_GirisCikis1_Stok11" FromRole="GirisCikis1" ToRole="Stok1" />
+        </EntityType>
+        <EntityType Name="Kullanici1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="İsim" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Soyisim" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GirisCikis1" Relationship="StokDbModel.FK_GirisCikis1_Kullanici11" FromRole="Kullanici1" ToRole="GirisCikis1" />
+          <NavigationProperty Name="Stok1" Relationship="StokDbModel.FK_Stok1_Kullanici1" FromRole="Kullanici1" ToRole="Stok1" />
+        </EntityType>
+        <EntityType Name="Stok1">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StokAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StokMiktar" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="StokBirim" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="KDV" Type="Int32" Nullable="false" />
+          <Property Name="Fiyat" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Aciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Resim" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DepoID" Type="Int32" />
+          <Property Name="KayitTarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depo1" Relationship="StokDbModel.FK_Stok1_Depo1" FromRole="Stok1" ToRole="Depo1" />
+          <NavigationProperty Name="GirisCikis1" Relationship="StokDbModel.FK_GirisCikis1_Stok11" FromRole="Stok1" ToRole="GirisCikis1" />
+          <NavigationProperty Name="Kullanici1" Relationship="StokDbModel.FK_Stok1_Kullanici1" FromRole="Stok1" ToRole="Kullanici1" />
+        </EntityType>
+        <Association Name="FK_GirisCikis1_Depo11">
+          <End Type="StokDbModel.Depo1" Role="Depo1" Multiplicity="1" />
+          <End Type="StokDbModel.GirisCikis1" Role="GirisCikis1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depo1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GirisCikis1">
+              <PropertyRef Name="DepoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok1_Depo1">
+          <End Type="StokDbModel.Depo1" Role="Depo1" Multiplicity="0..1" />
+          <End Type="StokDbModel.Stok1" Role="Stok1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depo1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok1">
+              <PropertyRef Name="DepoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GirisCikis1_Kullanici11">
+          <End Type="StokDbModel.Kullanici1" Role="Kullanici1" Multiplicity="1" />
+          <End Type="StokDbModel.GirisCikis1" Role="GirisCikis1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GirisCikis1">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GirisCikis1_Stok11">
+          <End Type="StokDbModel.Stok1" Role="Stok1" Multiplicity="1" />
+          <End Type="StokDbModel.GirisCikis1" Role="GirisCikis1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GirisCikis1">
+              <PropertyRef Name="StokID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stok1_Kullanici1">
+          <End Type="StokDbModel.Kullanici1" Role="Kullanici1" Multiplicity="1" />
+          <End Type="StokDbModel.Stok1" Role="Stok1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici1">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stok1">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StokLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StokAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StokMiktar" Type="Int32" />
+          <Property Name="KullaniciID" Type="Int32" />
+          <Property Name="IslemSaati" Type="DateTime" Precision="0" />
+          <Property Name="IslemTuru" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="Guid" Nullable="false" />
+          <Property Name="Application" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Host" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <Property Name="TimeUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StokDbModelStoreContainer" CdmEntityContainer="StokDbEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StokDbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Depo1">
+            <EntityTypeMapping TypeName="StokDbModel.Depo1">
+              <MappingFragment StoreEntitySet="Depo1">
+                <ScalarProperty Name="DepoAdi" ColumnName="DepoAdi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GirisCikis1">
+            <EntityTypeMapping TypeName="StokDbModel.GirisCikis1">
+              <MappingFragment StoreEntitySet="GirisCikis1">
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="İslem" ColumnName="İslem" />
+                <ScalarProperty Name="Birim" ColumnName="Birim" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="StokID" ColumnName="StokID" />
+                <ScalarProperty Name="DepoID" ColumnName="DepoID" />
+                <ScalarProperty Name="FisNo" ColumnName="FisNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanici1">
+            <EntityTypeMapping TypeName="StokDbModel.Kullanici1">
+              <MappingFragment StoreEntitySet="Kullanici1">
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Soyisim" ColumnName="Soyisim" />
+                <ScalarProperty Name="İsim" ColumnName="İsim" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stok1">
+            <EntityTypeMapping TypeName="StokDbModel.Stok1">
+              <MappingFragment StoreEntitySet="Stok1">
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="KayitTarih" ColumnName="KayitTarih" />
+                <ScalarProperty Name="DepoID" ColumnName="DepoID" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="KDV" ColumnName="KDV" />
+                <ScalarProperty Name="StokBirim" ColumnName="StokBirim" />
+                <ScalarProperty Name="StokMiktar" ColumnName="StokMiktar" />
+                <ScalarProperty Name="StokAdi" ColumnName="StokAdi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StokLogs">
+            <EntityTypeMapping TypeName="StokDbModel.StokLog">
+              <MappingFragment StoreEntitySet="StokLog">
+                <ScalarProperty Name="IslemTuru" ColumnName="IslemTuru" />
+                <ScalarProperty Name="IslemSaati" ColumnName="IslemSaati" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="StokMiktar" ColumnName="StokMiktar" />
+                <ScalarProperty Name="StokAdi" ColumnName="StokAdi" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ELMAH_Error">
+            <EntityTypeMapping TypeName="StokDbModel.ELMAH_Error">
+              <MappingFragment StoreEntitySet="ELMAH_Error">
+                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+                <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

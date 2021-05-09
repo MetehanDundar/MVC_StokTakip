@@ -1,0 +1,23 @@
+﻿@model MVC_StokTakip.Models.Entity.Stok1
+
+@{
+    ViewBag.Title = "MiktarEkle";
+}
+
+<h2>Miktar Ekle</h2>
+<div class="container">
+    @using (Html.BeginForm("MiktarEkle", "Stok", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(x => x.ID)
+            @Html.TextBoxFor(x => x.ID, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.StokMiktar)
+            @Html.TextBoxFor(x => x.StokMiktar, new { @class = "form-control" })
+        </div>
+        <div>
+            <button class="btn btn-secondary">Miktar Ekle</button>
+        </div>
+    }
+</div>

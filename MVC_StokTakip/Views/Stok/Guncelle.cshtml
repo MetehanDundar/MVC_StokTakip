@@ -1,0 +1,73 @@
+﻿@model MVC_StokTakip.Models.Entity.Stok1
+
+@{
+    ViewBag.Title = "Guncelle";
+}
+
+<h2>Guncelle</h2>
+<div class="container">
+    @using (Html.BeginForm("Guncelle", "Stok", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.ID)
+        <div class="form-group">
+            @Html.LabelFor(x => x.StokAdi)
+            @Html.TextBoxFor(x => x.StokAdi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.StokAdi, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.StokMiktar)
+            @Html.TextBoxFor(x => x.StokMiktar, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.StokMiktar, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.StokBirim)
+            @Html.TextBoxFor(x => x.StokBirim, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.StokBirim, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.KDV)
+            @Html.TextBoxFor(x => x.KDV, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.KDV, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Fiyat)
+            @Html.TextBoxFor(x => x.Fiyat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Fiyat, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Aciklama)
+            @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Aciklama, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Resim)
+            @Html.TextBoxFor(x => x.Resim, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Resim, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.DepoID)
+            @Html.TextBoxFor(x => x.DepoID, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.DepoID, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.KayitTarih)
+            @Html.TextBoxFor(x => x.KayitTarih, new { @class = "form-control", type = "date",@Value=Model.KayitTarih.ToString("yyyy-MM-dd") })
+            @Html.ValidationMessageFor(x => x.KayitTarih, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.KullaniciID)
+            @Html.TextBoxFor(x => x.KullaniciID, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.KullaniciID, "", new { @class = "text-danger" })
+        </div>
+        <div>
+            <button class="btn btn-success">Güncelle</button>
+        </div>
+    }
+</div>
+@section scriptshata
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}
+
+

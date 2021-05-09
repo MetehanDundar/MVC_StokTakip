@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0c28d4aeeca947528b861faf059e11b3" Name="Diagram1">
+        <EntityTypeShape EntityType="StokDbModel.sysdiagram" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StokDbModel.Depo1" Width="1.5" PointX="5.125" PointY="1.25" />
+        <EntityTypeShape EntityType="StokDbModel.GirisCikis1" Width="1.5" PointX="2.875" PointY="0.5" />
+        <EntityTypeShape EntityType="StokDbModel.Kullanici1" Width="1.5" PointX="3.875" PointY="4" />
+        <EntityTypeShape EntityType="StokDbModel.Stok1" Width="1.5" PointX="7.375" PointY="2.625" />
+        <AssociationConnector Association="StokDbModel.FK_GirisCikis1_Depo11" />
+        <AssociationConnector Association="StokDbModel.FK_Stok1_Depo1" />
+        <AssociationConnector Association="StokDbModel.FK_GirisCikis1_Kullanici11" />
+        <AssociationConnector Association="StokDbModel.FK_GirisCikis1_Stok11" />
+        <AssociationConnector Association="StokDbModel.FK_Stok1_Kullanici1" />
+        <EntityTypeShape EntityType="StokDbModel.StokLog" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="StokDbModel.ELMAH_Error" Width="1.5" PointX="0.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
